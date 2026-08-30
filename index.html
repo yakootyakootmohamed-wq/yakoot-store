@@ -3,32 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="YAKOOT STORE — ملابس رياضية وإكسسوارات ومنتجات مميزة">
+<meta property="og:title" content="YAKOOT STORE">
+<meta property="og:description" content="ملابس رياضية وإكسسوارات ومنتجات مميزة">
+<meta property="og:image" content="hero-banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="hero-banner.png">
 <title>YAKOOT | ملابس رياضية وإكسسوارات</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#faf8f5;color:#171515}
+body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#090909;color:#f5f5f5}
 a{text-decoration:none;color:inherit}
-header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.97);border-bottom:1px solid #e8dfd8;backdrop-filter:blur(10px)}
+header{position:sticky;top:0;z-index:10;background:rgba(5,5,5,.97);border-bottom:1px solid #3a2a12;backdrop-filter:blur(10px)}
 .nav{max-width:1180px;margin:auto;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:1px;color:#171515}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:1px;color:#e5b84f}
 .brand img{width:48px;height:48px;object-fit:contain;border-radius:8px}
-.cart{background:#171515;color:#fff;border:0;padding:11px 15px;border-radius:12px;font-weight:800;cursor:pointer}
+.cart{background:#111;color:#e5b84f;border:1px solid #6e5525;border:0;padding:11px 15px;border-radius:12px;font-weight:800;cursor:pointer}
 .hero-wrap{max-width:1180px;margin:0 auto;padding:18px}.hero-banner{position:relative;overflow:hidden;border-radius:22px;height:430px;background:#222;box-shadow:0 14px 40px rgba(0,0,0,.12)}.hero-banner img{width:100%;height:100%;object-fit:cover}.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.15) 65%,rgba(0,0,0,.08))}.hero-copy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:40px;color:#fff;max-width:620px}.hero-copy span{font-size:15px;margin-bottom:8px;opacity:.92}.hero-copy h1{font-size:clamp(42px,7vw,76px);margin:0 0 8px;letter-spacing:1px}.hero-copy h1 b{display:block;font-family:Georgia,serif;font-weight:500;letter-spacing:4px}.hero-copy p{font-size:19px;line-height:1.7;margin:0 0 12px}.hero-logo{display:none}
 .btn{display:inline-block;background:#c98f84;color:#fff;padding:14px 24px;border-radius:11px;font-weight:900;margin-top:8px}
 .section{max-width:1180px;margin:auto;padding:28px 18px}
 .section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.section-title h2{margin:0;font-size:29px;color:#171515}
-.line{height:3px;width:70px;background:#e21d1d;margin-top:8px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
-.filter{background:#fff;color:#555;border:1px solid #ded5ce;padding:9px 15px;border-radius:20px;cursor:pointer}
-.filter.active{background:#171515;color:#fff;border-color:#171515}
+.section-title h2{margin:0;font-size:29px;color:#fff}
+.line{height:3px;width:70px;background:#e5b84f;margin-top:8px}
+.filters{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:22px;padding:18px;border:1px solid #2f2f2f;border-radius:18px;background:#101010}
+.filter{min-height:82px;background:#0d0d0d;color:#f3f3f3;border:1px solid #6a5124;padding:10px 8px;border-radius:16px;cursor:pointer;font-weight:800;font-size:15px;transition:.2s;display:flex;align-items:center;justify-content:center;text-align:center}
+.filter:hover,.filter.active{background:#1a1a1a;color:#e5b84f;border-color:#e5b84f;box-shadow:0 0 0 1px rgba(229,184,79,.15),0 6px 20px rgba(0,0,0,.35);transform:translateY(-1px)}
+@media(max-width:800px){.filters{grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}.filter{min-height:70px;font-size:13px}}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.card{background:#fff;border:1px solid #e7ded7;border-radius:16px;overflow:hidden;box-shadow:0 5px 18px rgba(0,0,0,.05)}
-.pic{height:230px;background:#f0ebe6;display:flex;align-items:center;justify-content:center;color:#999}
+.card{background:#121212;border:1px solid #303030;border-radius:16px;overflow:hidden;box-shadow:0 5px 18px rgba(0,0,0,.05)}
+.pic{height:230px;background:#181818;display:flex;align-items:center;justify-content:center;color:#999}
 .pic img{width:100%;height:100%;object-fit:cover}
 .card-body{padding:15px}
-.card h3{margin:0 0 7px;font-size:17px;color:#222}
-.price{color:#b76f64;font-size:19px;font-weight:900;margin-bottom:10px}
+.card h3{margin:0 0 7px;font-size:17px;color:#fff}
+.price{color:#e5b84f;font-size:19px;font-weight:900;margin-bottom:10px}
 .add{width:100%;border:0;background:#171515;color:#fff;padding:11px;border-radius:9px;font-weight:800;cursor:pointer}
 .about{background:#fff;border:1px solid #e7ded7;border-radius:16px;padding:25px;line-height:1.9;color:#555}
 footer{border-top:1px solid #e3d9d1;text-align:center;padding:25px;color:#777;margin-top:25px;background:#171515}
@@ -68,10 +75,13 @@ footer{border-top:1px solid #e3d9d1;text-align:center;padding:25px;color:#777;ma
 
 <section class="section" id="products">
   <div class="section-title"><div><h2>منتجاتنا</h2><div class="line"></div></div></div>
-  <div class="filters">
-    <button class="filter active" onclick="filterProducts('all',this)">الكل</button>
-    <button class="filter" onclick="filterProducts('clothes',this)">ملابس رياضية</button>
-    <button class="filter" onclick="filterProducts('accessories',this)">إكسسوارات</button>
+  <div class="filters" aria-label="أقسام المتجر">
+    <button class="filter active" onclick="filterProducts('all',this)">▦<br>الكل</button>
+    <button class="filter" onclick="filterProducts('featured',this)">✦<br>منتجات مميزة</button>
+    <button class="filter" onclick="filterProducts('shoes',this)">⌁<br>أحذية</button>
+    <button class="filter" onclick="filterProducts('bags',this)">▣<br>شنط</button>
+    <button class="filter" onclick="filterProducts('accessories',this)">♢<br>إكسسوارات</button>
+    <button class="filter" onclick="filterProducts('clothes',this)">♧<br>ملابس رياضية</button>
   </div>
   <div class="grid" id="grid"></div>
 </section>
@@ -105,14 +115,14 @@ footer{border-top:1px solid #e3d9d1;text-align:center;padding:25px;color:#777;ma
 <script>
 const WHATSAPP_NUMBER = "201108110168";
 const products = [
- {id:1,name:"تيشيرت رياضي YAKOOT",price:450,cat:"clothes"},
- {id:2,name:"تريننج رياضي",price:850,cat:"clothes"},
- {id:3,name:"شورت رياضي",price:350,cat:"clothes"},
- {id:4,name:"هودي رياضي",price:700,cat:"clothes"},
- {id:5,name:"كاب YAKOOT",price:250,cat:"accessories"},
- {id:6,name:"شنطة رياضية",price:550,cat:"accessories"},
+ {id:1,name:"تيشيرت رياضي YAKOOT",price:450,cat:"clothes",featured:true},
+ {id:2,name:"تريننج رياضي",price:850,cat:"clothes",featured:true},
+ {id:3,name:"شورت رياضي",price:350,cat:"clothes",featured:true},
+ {id:4,name:"هودي رياضي",price:700,cat:"clothes",featured:true},
+ {id:5,name:"كاب YAKOOT",price:250,cat:"accessories",featured:true},
+ {id:6,name:"شنطة رياضية",price:550,cat:"bags",featured:true},
  {id:7,name:"جوارب رياضية",price:180,cat:"accessories"},
- {id:8,name:"زجاجة مياه رياضية",price:220,cat:"accessories"}
+ {id:8,name:"زجاجة مياه رياضية",price:220,cat:"accessories",featured:true}
 ];
 let cart = {};
 
@@ -131,7 +141,7 @@ function render(list=products){
 function filterProducts(cat,btn){
  document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
  btn.classList.add("active");
- render(cat==="all"?products:products.filter(p=>p.cat===cat));
+ render(cat==="all"?products:cat==="featured"?products.filter(p=>p.featured):products.filter(p=>p.cat===cat));
 }
 function addToCart(id){cart[id]=(cart[id]||0)+1;updateCount();openCart();}
 function updateCount(){document.getElementById("count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);}
