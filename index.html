@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAKOOT | ملابس رياضية وإكسسوارات</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#faf8f5;color:#171515}
+a{text-decoration:none;color:inherit}
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.97);border-bottom:1px solid #e8dfd8;backdrop-filter:blur(10px)}
+.nav{max-width:1180px;margin:auto;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:1px;color:#171515}
+.brand img{width:48px;height:48px;object-fit:contain;border-radius:8px}
+.cart{background:#171515;color:#fff;border:0;padding:11px 15px;border-radius:12px;font-weight:800;cursor:pointer}
+.hero-wrap{max-width:1180px;margin:0 auto;padding:18px}.hero-banner{position:relative;overflow:hidden;border-radius:22px;height:430px;background:#222;box-shadow:0 14px 40px rgba(0,0,0,.12)}.hero-banner img{width:100%;height:100%;object-fit:cover}.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.15) 65%,rgba(0,0,0,.08))}.hero-copy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:40px;color:#fff;max-width:620px}.hero-copy span{font-size:15px;margin-bottom:8px;opacity:.92}.hero-copy h1{font-size:clamp(42px,7vw,76px);margin:0 0 8px;letter-spacing:1px}.hero-copy h1 b{display:block;font-family:Georgia,serif;font-weight:500;letter-spacing:4px}.hero-copy p{font-size:19px;line-height:1.7;margin:0 0 12px}.hero-logo{display:none}
+.btn{display:inline-block;background:#c98f84;color:#fff;padding:14px 24px;border-radius:11px;font-weight:900;margin-top:8px}
+.section{max-width:1180px;margin:auto;padding:28px 18px}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.section-title h2{margin:0;font-size:29px;color:#171515}
+.line{height:3px;width:70px;background:#e21d1d;margin-top:8px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filter{background:#fff;color:#555;border:1px solid #ded5ce;padding:9px 15px;border-radius:20px;cursor:pointer}
+.filter.active{background:#171515;color:#fff;border-color:#171515}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{background:#fff;border:1px solid #e7ded7;border-radius:16px;overflow:hidden;box-shadow:0 5px 18px rgba(0,0,0,.05)}
+.pic{height:230px;background:#f0ebe6;display:flex;align-items:center;justify-content:center;color:#999}
+.pic img{width:100%;height:100%;object-fit:cover}
+.card-body{padding:15px}
+.card h3{margin:0 0 7px;font-size:17px;color:#222}
+.price{color:#b76f64;font-size:19px;font-weight:900;margin-bottom:10px}
+.add{width:100%;border:0;background:#171515;color:#fff;padding:11px;border-radius:9px;font-weight:800;cursor:pointer}
+.about{background:#fff;border:1px solid #e7ded7;border-radius:16px;padding:25px;line-height:1.9;color:#555}
+footer{border-top:1px solid #e3d9d1;text-align:center;padding:25px;color:#777;margin-top:25px;background:#171515}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:30;padding:20px}
+.modal-box{max-width:520px;margin:50px auto;background:#fff;border:1px solid #ddd;border-radius:16px;padding:20px;color:#222}
+.modal-box h2{margin-top:0}
+.item{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #2a2a2a}
+.qty button{background:#222;color:#fff;border:1px solid #444;border-radius:6px;width:30px;height:30px}
+.close{float:left;background:none;border:0;color:#aaa;font-size:25px;cursor:pointer}
+.order{display:block;text-align:center;background:#25D366;color:#071b0d;padding:13px;border-radius:10px;font-weight:900;margin-top:18px}
+.empty{color:#999;text-align:center;padding:20px}
+@media(max-width:800px){.hero-wrap{padding:10px}.hero-banner{height:390px;border-radius:16px}.hero-copy{padding:25px;align-items:flex-start}.hero-copy h1{font-size:48px}.hero-copy p{font-size:16px}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:450px){.grid{grid-template-columns:1fr 1fr}.pic{height:155px}.card h3{font-size:15px}.section{padding-left:12px;padding-right:12px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand"><img src="logo.png" alt="YAKOOT"><span>YAKOOT</span></div>
+    <button class="cart" onclick="openCart()">🛒 السلة (<span id="count">0</span>)</button>
+  </div>
+</header>
+
+<main>
+<section class="hero-wrap">
+  <div class="hero-banner">
+    <img src="hero-banner.png" alt="تشكيلة ياقوت للملابس">
+    <div class="hero-overlay"></div>
+    <div class="hero-copy">
+      <span>تشكيلة جديدة • أناقة يومية</span>
+      <h1>ياقوت <b>YAKOOT</b></h1>
+      <p>اختاري إطلالتك المفضلة من أحدث صيحات الموضة.</p>
+      <a class="btn" href="#products">تسوقي الآن 🛍️</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <div class="section-title"><div><h2>منتجاتنا</h2><div class="line"></div></div></div>
+  <div class="filters">
+    <button class="filter active" onclick="filterProducts('all',this)">الكل</button>
+    <button class="filter" onclick="filterProducts('clothes',this)">ملابس رياضية</button>
+    <button class="filter" onclick="filterProducts('accessories',this)">إكسسوارات</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="section">
+  <div class="about">
+    <h2>عن YAKOOT</h2>
+    <p>متجر YAKOOT للملابس الرياضية والإكسسوارات. هدفنا نقدم لك اختيارات عملية وشكل رياضي مميز.</p>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 YAKOOT — جميع الحقوق محفوظة</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeCart()">
+  <div class="modal-box">
+    <button class="close" onclick="closeCart()">×</button>
+    <h2>سلة الطلب</h2>
+    <div id="cartItems"></div>
+    <div id="total" style="margin-top:15px;font-size:20px;font-weight:800;color:#e5b84f"></div>
+    <div class="checkout-form" style="margin-top:18px;display:grid;gap:10px">
+      <input id="customerName" type="text" placeholder="الاسم بالكامل" aria-label="الاسم بالكامل" style="width:100%;padding:12px;border-radius:9px;border:1px solid #333;background:#181818;color:#fff;font-size:15px">
+      <input id="customerPhone" type="tel" placeholder="رقم الهاتف" aria-label="رقم الهاتف" style="width:100%;padding:12px;border-radius:9px;border:1px solid #333;background:#181818;color:#fff;font-size:15px;direction:rtl">
+      <input id="customerAddress" type="text" placeholder="العنوان بالتفصيل" aria-label="العنوان بالتفصيل" style="width:100%;padding:12px;border-radius:9px;border:1px solid #333;background:#181818;color:#fff;font-size:15px">
+      <textarea id="customerNotes" placeholder="ملاحظات إضافية (اختياري)" aria-label="ملاحظات إضافية" rows="3" style="width:100%;padding:12px;border-radius:9px;border:1px solid #333;background:#181818;color:#fff;font-size:15px;resize:vertical"></textarea>
+    </div>
+    <button id="wa" class="order" type="button" onclick="sendOrder()">إتمام الطلب عبر واتساب</button>
+  </div>
+</div>
+
+<script>
+const WHATSAPP_NUMBER = "201108110168";
+const products = [
+ {id:1,name:"تيشيرت رياضي YAKOOT",price:450,cat:"clothes"},
+ {id:2,name:"تريننج رياضي",price:850,cat:"clothes"},
+ {id:3,name:"شورت رياضي",price:350,cat:"clothes"},
+ {id:4,name:"هودي رياضي",price:700,cat:"clothes"},
+ {id:5,name:"كاب YAKOOT",price:250,cat:"accessories"},
+ {id:6,name:"شنطة رياضية",price:550,cat:"accessories"},
+ {id:7,name:"جوارب رياضية",price:180,cat:"accessories"},
+ {id:8,name:"زجاجة مياه رياضية",price:220,cat:"accessories"}
+];
+let cart = {};
+
+function render(list=products){
+ const grid=document.getElementById("grid");
+ grid.innerHTML=list.map(p=>`
+ <article class="card">
+  <div class="pic">صورة المنتج</div>
+  <div class="card-body">
+   <h3>${p.name}</h3>
+   <div class="price">${p.price} جنيه</div>
+   <button class="add" onclick="addToCart(${p.id})">أضف للسلة</button>
+  </div>
+ </article>`).join("");
+}
+function filterProducts(cat,btn){
+ document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
+ btn.classList.add("active");
+ render(cat==="all"?products:products.filter(p=>p.cat===cat));
+}
+function addToCart(id){cart[id]=(cart[id]||0)+1;updateCount();openCart();}
+function updateCount(){document.getElementById("count").textContent=Object.values(cart).reduce((a,b)=>a+b,0);}
+function sendOrder(){
+ const ids=Object.keys(cart);
+ if(!ids.length){alert("السلة فارغة. أضف منتجًا أولاً.");return;}
+ const name=document.getElementById("customerName").value.trim();
+ const phone=document.getElementById("customerPhone").value.trim();
+ const address=document.getElementById("customerAddress").value.trim();
+ const notes=document.getElementById("customerNotes").value.trim();
+ if(!name || !phone || !address){alert("من فضلك اكتب الاسم ورقم الهاتف والعنوان.");return;}
+ if(WHATSAPP_NUMBER.includes("ضع_")){alert("لم يتم ضبط رقم واتساب المتجر بعد.");return;}
+ let total=0, msg="مرحباً YAKOOT، أريد تأكيد الطلب:%0A%0A";
+ ids.forEach(id=>{const p=products.find(x=>x.id==id); total+=p.price*cart[id]; msg+=`• ${p.name} × ${cart[id]} = ${p.price*cart[id]} جنيه%0A`;});
+ msg+=`%0Aالإجمالي: ${total} جنيه%0A%0Aالاسم: ${encodeURIComponent(name)}%0Aرقم الهاتف: ${encodeURIComponent(phone)}%0Aالعنوان: ${encodeURIComponent(address)}`;
+ if(notes) msg+=`%0Aملاحظات: ${encodeURIComponent(notes)}`;
+ window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+msg,"_blank");
+}
+function openCart(){
+ document.getElementById("modal").style.display="block";
+ const ids=Object.keys(cart);
+ const box=document.getElementById("cartItems");
+ if(!ids.length){box.innerHTML='<div class="empty">السلة فارغة</div>';document.getElementById("total").textContent="";return;}
+ let total=0;
+ box.innerHTML=ids.map(id=>{
+  const p=products.find(x=>x.id==id),q=cart[id];total+=p.price*q;
+  return `<div class="item"><div>${p.name}<br><b>${p.price*q} جنيه</b></div>
+  <div class="qty"><button onclick="changeQty(${p.id},-1)">−</button> ${q} <button onclick="changeQty(${p.id},1)">+</button></div></div>`;
+ }).join("");
+ document.getElementById("total").textContent="الإجمالي: "+total+" جنيه";
+
+}
+function changeQty(id,n){cart[id]+=n;if(cart[id]<=0)delete cart[id];updateCount();openCart();}
+function closeCart(){document.getElementById("modal").style.display="none";}
+render();
+</script>
+</body>
+</html>
