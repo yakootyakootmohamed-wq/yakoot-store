@@ -31,7 +31,7 @@ body{background:radial-gradient(circle at 85% -10%,#2a1d0d 0,#08080a 32%),#08080
 <body>
 <header class="topbar">
 <a href="index.html">← المتجر</a>
-<div class="brand"><img src="assets/256.png" alt="YAKOOT"><span>YAKOOT | لوحة الإدارة</span></div>
+<div class="brand"><img src="assets/logo.png" alt="YAKOOT"><span>YAKOOT | لوحة الإدارة</span></div>
 <button id="logout" class="icon-btn" style="display:none">تسجيل الخروج</button>
 </header>
 <main class="admin-wrap">
@@ -72,20 +72,49 @@ body{background:radial-gradient(circle at 85% -10%,#2a1d0d 0,#08080a 32%),#08080
 <script src="config.js"></script>
 <script src="supabase-client.js"></script>
 <script>
-let sb;
+let sb=null;
 const statusNames={new:'جديد',confirmed:'تم التأكيد',preparing:'قيد التجهيز',shipped:'تم الشحن',delivered:'تم التسليم',cancelled:'ملغي'};
-window.addEventListener('supabase-ready',async()=>{sb=window.supabaseClient;const {data:{session}}=await sb.auth.getSession();if(session)showPanel();});
-async function login(){if(!sb)return alert('جارٍ تجهيز الاتصال بقاعدة البيانات، حاول مرة أخرى.');const email=document.getElementById('email').value.trim(),password=document.getElementById('password').value; if(!email||!password)return alert('أدخل البريد الإلكتروني وكلمة المرور.');const {error}=await sb.auth.signInWithPassword({email,password});if(error)return alert('بيانات الدخول غير صحيحة.');showPanel()}
-async function showPanel(){document.getElementById('loginBox').style.display='none';document.getElementById('panel').style.display='block';document.getElementById('logout').style.display='block';await Promise.all([loadProducts(),loadOrders()])}
-async function logout(){await sb.auth.signOut();location.reload()}
-document.getElementById('logout').onclick=logout;
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function imgUrl(v){return v&&String(v).trim()?v:'assets/256.png'}
-async function loadProducts(){const {data,error}=await sb.from('products').select('*').order('created_at',{ascending:false});if(error)return document.getElementById('list').innerHTML='<div class="empty">تعذر تحميل المنتجات: '+esc(error.message)+'</div>';document.getElementById('list').innerHTML=(data||[]).map(x=>`<div class="product-row"><img src="${esc(imgUrl(x.image_url))}" alt="${esc(x.name)}" onerror="this.src='assets/256.png'"><div class="product-info"><b>${esc(x.name)}</b><small>${Number(x.price||0).toLocaleString('ar-EG')} ج.م · ${esc(x.category||'عام')} · المخزون: ${Number(x.stock||0)}</small><small><span class="status-dot ${x.active?'':'off'}"></span>${x.active?'نشط':'مخفي'}</small></div><button class="danger" onclick="del('${x.id}')">حذف</button></div>`).join('')||'<div class="empty">لا توجد منتجات حتى الآن.</div>'}
-async function addProduct(){const name=document.getElementById('name').value.trim(),price=Number(document.getElementById('price').value),category=document.getElementById('cat').value.trim()||'عام',image_url=document.getElementById('image').value.trim()||'assets/256.png',stock=Number(document.getElementById('stock').value)||0;if(!name||!price)return alert('أدخل اسم المنتج والسعر.');const {error}=await sb.from('products').insert({name,price,category,image_url,stock});if(error)return alert(error.message);['name','price','cat','image'].forEach(id=>document.getElementById(id).value='');document.getElementById('stock').value='0';document.getElementById('imagePreview').style.display='none';await loadProducts()}
-async function del(id){if(!confirm('هل تريد حذف هذا المنتج نهائيًا؟'))return;const {error}=await sb.from('products').delete().eq('id',id);if(error)return alert(error.message);await loadProducts()}
+function imgUrl(v){return v&&String(v).trim()?v:'assets/logo.png'}
+async function initAdmin(){
+  try{
+    sb=await window.supabaseReadyPromise;
+    const {data:{session}}=await sb.auth.getSession();
+    if(session) await showPanel();
+  }catch(e){
+    console.error(e);
+    const msg='تعذر تجهيز الاتصال بقاعدة البيانات. تأكد من الإنترنت ثم أعد تحميل الصفحة.';
+    document.querySelector('#loginBox .hint').textContent=msg;
+  }
+}
+window.addEventListener('supabase-ready',()=>{if(!sb){sb=window.supabaseClient;}});
+window.addEventListener('supabase-error',e=>{document.querySelector('#loginBox .hint').textContent='تعذر الاتصال بقاعدة البيانات. أعد تحميل الصفحة وحاول مرة أخرى.';});
+async function login(){
+  try{
+    if(!sb) sb=await window.supabaseReadyPromise;
+    const email=document.getElementById('email').value.trim(),password=document.getElementById('password').value;
+    if(!email||!password)return alert('أدخل البريد الإلكتروني وكلمة المرور.');
+    const {error}=await sb.auth.signInWithPassword({email,password});
+    if(error){console.error(error);return alert('تعذر تسجيل الدخول: '+error.message);}
+    await showPanel();
+  }catch(e){alert('تعذر الاتصال بقاعدة البيانات. تأكد من الإنترنت ثم حاول مرة أخرى.');}
+}
+async function showPanel(){document.getElementById('loginBox').style.display='none';document.getElementById('panel').style.display='block';document.getElementById('logout').style.display='block';await Promise.all([loadProducts(),loadOrders()])}
+async function logout(){if(sb)await sb.auth.signOut();location.reload()}
+document.getElementById('logout').onclick=logout;
+async function loadProducts(){const {data,error}=await sb.from('products').select('*').order('created_at',{ascending:false});if(error)return document.getElementById('list').innerHTML='<div class="empty">تعذر تحميل المنتجات: '+esc(error.message)+'</div>';document.getElementById('list').innerHTML=(data||[]).map(x=>`<div class="product-row"><img src="${esc(imgUrl(x.image_url))}" alt="${esc(x.name)}" onerror="this.src='assets/logo.png'"><div class="product-info"><b>${esc(x.name)}</b><small>${Number(x.price||0).toLocaleString('ar-EG')} ج.م · ${esc(x.category||'عام')} · المخزون: ${Number(x.stock||0)}</small><small><span class="status-dot ${x.active?'':'off'}"></span>${x.active?'نشط':'مخفي'}</small></div><button class="danger" onclick="del('${x.id}')">حذف</button></div>`).join('')||'<div class="empty">لا توجد منتجات حتى الآن.</div>'}
+async function addProduct(){
+  if(!sb) sb=await window.supabaseReadyPromise;
+  const name=document.getElementById('name').value.trim(),price=Number(document.getElementById('price').value),category=document.getElementById('cat').value.trim()||'عام',image_url=document.getElementById('image').value.trim()||'assets/logo.png',stock=Number(document.getElementById('stock').value)||0;
+  if(!name||!price)return alert('أدخل اسم المنتج والسعر.');
+  const {error}=await sb.from('products').insert({name,price,category,image_url,stock,active:true});
+  if(error)return alert('تعذر إضافة المنتج: '+error.message);
+  ['name','price','cat','image'].forEach(id=>document.getElementById(id).value='');document.getElementById('stock').value='0';document.getElementById('imagePreview').style.display='none';await loadProducts();alert('تمت إضافة المنتج بنجاح ✅');
+}
+async function del(id){if(!confirm('هل تريد حذف هذا المنتج نهائيًا؟'))return;const {error}=await sb.from('products').delete().eq('id',id);if(error)return alert('تعذر حذف المنتج: '+error.message);await loadProducts()}
 async function loadOrders(){const {data,error}=await sb.from('orders').select('*,order_items(*)').order('created_at',{ascending:false});if(error)return document.getElementById('orders').innerHTML='<div class="empty">تعذر تحميل الطلبات: '+esc(error.message)+'</div>';document.getElementById('orders').innerHTML=(data||[]).map(o=>`<div class="order-card"><div class="order-head"><div><b>طلب #${esc(String(o.id).slice(0,8))}</b><div class="order-meta">العميل: ${esc(o.customer_name)}<br>الهاتف: ${esc(o.phone)}<br>العنوان: ${esc(o.address)}<br>الإجمالي: <strong>${Number(o.total||0).toLocaleString('ar-EG')} ج.م</strong></div></div><select class="status-select" onchange="setStatus('${o.id}',this.value)">${Object.entries(statusNames).map(([k,v])=>`<option value="${k}" ${o.status===k?'selected':''}>${v}</option>`).join('')}</select></div><div class="order-items">${(o.order_items||[]).map(i=>`<div>• ${esc(i.product_name)} × ${Number(i.quantity||0)}</div>`).join('')||'لا توجد تفاصيل للمنتجات.'}</div></div>`).join('')||'<div class="empty">لا توجد طلبات حتى الآن.</div>'}
 async function setStatus(id,status){const {error}=await sb.from('orders').update({status}).eq('id',id);if(error)alert('تعذر تحديث حالة الطلب: '+error.message)}
 document.getElementById('image').addEventListener('input',e=>{const p=document.getElementById('imagePreview'),v=e.target.value.trim();if(!v){p.style.display='none';return}p.src=v;p.style.display='block';p.onerror=()=>{p.style.display='none'}});
+initAdmin();
 </script>
 </body></html>

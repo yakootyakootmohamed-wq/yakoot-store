@@ -6,46 +6,28 @@
 <meta name="theme-color" content="#0b0b0d">
 <meta name="description" content="YAKOOT - متجر ياقوت">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="logo.png">
+<link rel="icon" href="assets/logo.png">
 <link rel="stylesheet" href="styles.css">
 <title>YAKOOT | ياقوت</title>
 </head>
 <body>
 <header class="topbar">
-  <button id="menuBtn" class="icon-btn menu" aria-label="لوحة الإدارة">☰</button>
-  <div class="brand"><img src="logo.png" alt="YAKOOT"><span>YAKOOT</span></div>
-  <button id="cartBtn" class="cart-btn" aria-label="السلة">السلة 🛒 <b id="cartCount">0</b></button>
+  <button id="menuBtn" class="icon-btn" aria-label="القائمة">☰</button>
+  <div class="brand"><img src="assets/logo.png" alt="YAKOOT"><span>YAKOOT</span></div>
+  <button id="cartBtn" class="icon-btn" aria-label="السلة">🛒 <b id="cartCount">0</b></button>
 </header>
-
 <main>
-  <section class="hero-image" aria-label="متجر ياقوت">
-    <img src="store-image.png" alt="YAKOOT STORE - أسلوبك يبدأ من هنا">
+  <section class="hero-banner-wrap">
+    <img class="hero-banner" src="assets/hero-banner.png" alt="YAKOOT STORE - أسلوبك يبدأ من هنا">
   </section>
-
-  <section class="categories" aria-label="الأقسام">
-    <button data-cat=""> <span>▦</span><strong>الكل</strong></button>
-    <button data-cat="منتجات مميزة"><span>▣</span><strong>منتجات مميزة</strong></button>
-    <button data-cat="أحذية"><span>👟</span><strong>أحذية</strong></button>
-    <button data-cat="شنط"><span>🎒</span><strong>شنط</strong></button>
-    <button data-cat="إكسسوارات"><span>⌒</span><strong>إكسسوارات</strong></button>
-    <button data-cat="ملابس رياضية"><span>🏋</span><strong>ملابس رياضية</strong></button>
-  </section>
-
-  <section class="section-head">
-    <div><h2>منتجاتنا</h2><span></span></div>
-    <button id="showAll" class="outline-btn">عرض الكل ‹</button>
-  </section>
-
   <section class="toolbar">
     <input id="search" placeholder="ابحث عن منتج..." aria-label="البحث عن منتج">
-    <select id="category" aria-label="اختيار القسم"><option value="">كل الأقسام</option></select>
+    <select id="category" aria-label="القسم"><option value="">كل الأقسام</option></select>
   </section>
-
   <section id="products" class="products"></section>
 </main>
-
 <aside id="drawer" class="drawer">
-  <div class="drawer-head"><h2>سلة المشتريات</h2><button onclick="closeCart()" aria-label="إغلاق">×</button></div>
+  <div class="drawer-head"><h2>سلة المشتريات</h2><button onclick="closeCart()">×</button></div>
   <div id="cartItems"></div>
   <div class="cart-total"><span>الإجمالي</span><strong id="cartTotal">0 ج.م</strong></div>
   <button class="primary full" onclick="checkout()">إتمام الطلب</button>
@@ -53,5 +35,6 @@
 <div id="overlay" class="overlay" onclick="closeCart()"></div>
 <footer>© YAKOOT — متجر ياقوت</footer>
 <script src="config.js"></script><script src="supabase-client.js"></script><script src="app.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{});}</script>
 </body>
 </html>
